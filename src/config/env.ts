@@ -39,5 +39,10 @@ function getEnv(): EnvConfig {
 
 const env = getEnv();
 
+// Validate required environment variables
+if (!env.CLOUDINARY_API_KEY || !env.CLOUDINARY_API_SECRET || !env.CLOUDINARY_CLOUD_NAME) {
+  throw new Error('Missing required Cloudinary environment variables: CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET');
+}
+
 export default env;
 export type { EnvConfig };

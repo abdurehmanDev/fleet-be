@@ -16,6 +16,10 @@ const options: swaggerJsdoc.Options = {
     },
     servers: [
       {
+        url: 'https://fleet-be-zidi.onrender.com/api/v1',
+        description: 'Production server',
+      },
+      {
         url: 'http://localhost:3000/api/v1',
         description: 'Development server',
       },

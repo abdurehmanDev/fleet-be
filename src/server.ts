@@ -49,9 +49,13 @@ process.on('uncaughtException', (err) => {
 });
 
 server.listen(PORT, () => {
+  const baseUrl = env.NODE_ENV === 'production' 
+    ? 'https://fleet-be-zidi.onrender.com' 
+    : `http://localhost:${PORT}`;
+  
   logger.info(`🚀 Rangrej Fleet Backend running on port ${PORT}`);
   logger.info(`📝 Environment: ${env.NODE_ENV}`);
-  logger.info(`📚 API Docs: http://localhost:${PORT}/api-docs`);
+  logger.info(`📚 API Docs: ${baseUrl}/api-docs`);
   logger.info(`🔌 Socket.IO enabled`);
 });
 

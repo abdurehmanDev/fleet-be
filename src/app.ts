@@ -35,8 +35,9 @@ app.use(cors({
     if (!origin) return callback(null, true);
     
     const allowedOrigins = env.CORS_ORIGIN.split(',');
-    // Allow same-origin requests
+    // Allow same-origin requests (localhost and production)
     if (origin === `http://localhost:${env.PORT}`) return callback(null, true);
+    if (origin === 'https://fleet-be-zidi.onrender.com') return callback(null, true);
     // Allow configured origins
     if (allowedOrigins.includes(origin)) return callback(null, true);
     

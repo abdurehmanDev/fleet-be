@@ -30,7 +30,18 @@ const app = express();
 // Security middleware
 app.use(helmet());
 app.use(cors({
-  origin: env.CORS_ORIGIN.split(','),
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps, curl, or same-origin)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = env.CORS_ORIGIN.split(',');
+    // Allow same-origin requests
+    if (origin === `http://localhost:${env.PORT}`) return callback(null, true);
+    // Allow configured origins
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true,
 }));
 app.use(cookieParser());
